@@ -9,6 +9,7 @@ var Tracker = function()
 	this.scale = [0, 2, 3, 5, 7, 8, 10];
 	this.cc = {};
 	this.cc.aenv = [2,3,4,5];
+	this.print_output = true;
 
 	for(var i = 0; i < this.seq.length; i++)
 	{
@@ -102,8 +103,19 @@ var Tracker = function()
 				arr.push(current_val);
 			}
 		}
-		//outlet(0,arr);
 
+		if(this.print_output === true)
+		{
+			post("[",this.play_index,"] ");
+			for(var i in this.seq[val])
+			{
+				if(this.seq[val][i] != undefined)
+				{
+					post(i,this.seq[val][i]," ");
+				}
+			}
+			post("\n");
+		}
 
 		if(this.seq[val].aenv != null)
 		{
@@ -120,7 +132,6 @@ var Tracker = function()
 		if(this.seq[val].noteNum != null)
 		{
 			note(this.seq[val].noteNum,this.seq[val].velo,this.seq[val].dur,1);
-			// note(60,100,1/16,1);
 		}
 
 		return arr;
